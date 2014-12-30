@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -n "$1" ]; then
+	name="$1"
+else
+	name="."
+fi
+
+if [[ (-d "${name}") && (-d "${name}"/.svn) && (-a "${name}"/.svn/entries) ]]; then
+#	head "${name}"/.svn/entries | tr '\n' ' ' | grep -o 'dir [0-9]* ' | sed 's/dir //' | tr -d ' '
+	svn info|grep 'Last Changed Rev:'|cut -d ':' -f 2|tr -d ' '
+else
+	exit
+fi
+
+exit $?

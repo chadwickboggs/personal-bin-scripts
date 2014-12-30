@@ -1,0 +1,13 @@
+#!/bin/bash
+
+while read w; do
+	x=$(echo $w|cut -d , -f 1)
+	y=$(echo $w|cut -d , -f 2)
+	z=$(echo $w|cut -d , -f 3)
+
+	if [[ (-n "$(isPrime $x)") && (-n "$(isPrime $y)") && (-n "$(isPrime $z)") ]]; then
+		echo $x,$y,$z
+	fi
+done
+
+exit $?

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+"$(dirname $0)/lsp_rsync_cp" $@
+
+exit $?

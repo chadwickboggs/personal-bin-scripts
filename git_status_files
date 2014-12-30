@@ -1,0 +1,23 @@
+#!/bin/bash
+
+USAGE="git_status_files -c <the \"git status -s\" output character>"
+
+args=`getopt -o "c:h" -l "character,help" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+		-c)		shift; character="$1";	shift;;
+		-h)		echo "${USAGE}";		exit 0;;
+		--) 	shift;					break;;
+		*)		echo "${USAGE}";		exit 1;;
+  esac
+done
+
+if [ -z "${character}" ]; then
+	echo "${USAGE}"
+	exit 1
+fi
+
+git status -s | grep "^\( ${character}\)\|\(${character} \) " | sed "s/^\( ${character}\)\|\(${character} \) //"
+
+exit $?

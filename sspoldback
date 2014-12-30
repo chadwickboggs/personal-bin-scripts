@@ -1,0 +1,50 @@
+#!/bin/bash
+
+args=`getopt -o "f:m:t:" -l "folder,message" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+		-m) shift; message=".$1"; shift;;
+		-f) shift; folder="$1"; shift;;
+		-t) shift; target="$1"; shift;;
+		--) shift ; break;;
+		*) echo "Internal error!" ; exit 1;;
+  esac
+done
+
+if [ -n "${folder}" ]; then
+	the_name="$(basename "${folder}")"
+	the_target="${folder}"
+else
+	the_name="$(basename "$(pwd)")"
+	the_target="."
+fi
+
+target_folder=~/back
+if [ -n "${target}" ]; then
+	target_folder="${target_folder}/${target}"
+fi
+
+if [ -n "${message}" ]; then
+	message=$(echo "${message}" | tr ' ' '_')
+fi
+
+svn_revision=$(svn_revision "${the_target}")
+
+if [ -n "${svn_revision}" ]; then
+	the_filename="${target_folder}/${the_name}.rev-${svn_revision}.$(now).modified${message}.tgz"
+	the_added_files=$(svn st | grep '^A ' | sed 's/A  .    //')
+	the_modified_files=$(svn st | grep '^M ' | sed 's/M       //')
+else
+	the_filename="${target_folder}/${the_name}.$(now).modified${message}.tgz"
+	the_added_files="*"
+fi
+
+if [[ (-z "${the_added_files}") && (-z "${the_modified_files}") ]]; then
+	echo "No file found for backup."
+	exit 0
+fi
+
+tar --use-compress-program=pigz -cf ${the_filename} ${the_added_files} ${the_modified_files}
+
+exit $?

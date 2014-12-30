@@ -1,0 +1,40 @@
+#!/bin/bash
+
+args=`getopt -o "f:m:t:" -l "folder,message" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+		-m) shift; message=".$1"; shift;;
+		-f) shift; folder="$1"; shift;;
+		-t) shift; target="$1"; shift;;
+		--) shift ; break;;
+		*) echo "Internal error!" ; exit 1;;
+  esac
+done
+
+if [ -n "${folder}" ]; then
+	the_name="$(basename "${folder}")"
+	the_target="${folder}"
+else
+	the_name="$(basename "$(pwd)")"
+	the_target="."
+fi
+
+target_folder=~/back
+if [ -n "${target}" ]; then
+	target_folder="${target_folder}/${target}"
+fi
+
+if [ -n "${message}" ]; then
+	message=$(echo "${message}" | tr ' ' '_')
+fi
+
+svn_revision=$(svn_revision "${the_target}")
+
+if [ -n "${svn_revision}" ]; then
+	tar --use-compress-program=plzip -cf "${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tlz" "${the_target}"
+else
+	tar --use-compress-program=plzip -cf "${target_folder}/${the_name}.$(now)${message}.tlz" "${the_target}"
+fi
+
+exit $?

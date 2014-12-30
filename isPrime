@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "No number provided.  Please provide a number as a command line argument."
+	exit 1
+fi
+
+perl -e 'print "Prime\n" if (1 x shift) !~ /^1?$|^(11+?)\1+$/' $1
+
+exit $?

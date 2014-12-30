@@ -1,0 +1,11 @@
+#!/bin/bash
+ 
+if [ "$1" == "-a" ]; then
+	shift;
+	lspargs="-a $1"
+	shift
+fi
+
+lsp "${lspargs}" "rscp $*"
+
+exit $?

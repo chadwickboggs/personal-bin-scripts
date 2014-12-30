@@ -1,0 +1,8 @@
+0	0	*	*	*	/usr/bin/nice /Users/chad/bin/rsync_cp_rp_dev        2>&1 >> /Users/chad/log/rp_backup_dev.log
+0	1	*	*	*	/usr/bin/nice /Users/chad/bin/rsync_cp_ots_dev       2>&1 >> /Users/chad/log/ots_backup_dev.log
+0	3	*	*	*	/usr/bin/nice /Users/chad/bin/rsync_cp_rp_workspace  2>&1 >> /Users/chad/log/rp_backup_workspace.log
+0	4	*	*	*	/usr/bin/nice /Users/chad/bin/rsync_cp_ots_workspace 2>&1 >> /Users/chad/log/ots_backup_workspace.log
+59	20	*	*	*	mkdir -p /Volumes/RP/Users                           2>&1 >> /Users/chad/log/rp_backup_mkdir.log
+0	21	*	*	*	/usr/bin/nice /Users/chad/bin/rsync_cp_rp_chad       2>&1 >> /Users/chad/log/rp_backup_chad.log
+59	21	*	*	*	mkdir -p /Volumes/ots/Users                          2>&1 >> /Users/chad/log/rp_backup_mkdir.log
+0	22	*	*	*	/usr/bin/nice /Users/chad/bin/rsync_cp_ots_chad      2>&1 >> /Users/chad/log/ots_backup_chad.log

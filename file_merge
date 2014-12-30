@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/Applications/Xcode.app/Contents/Applications/FileMerge.app/Contents/MacOS/FileMerge -psn_0_2122246 $@
+
+exit $?

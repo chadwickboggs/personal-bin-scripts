@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -e /tmp/inc_tmp24_var24 ]; then
+	rm /tmp/inc_tmp24_var24
+fi
+
+exit $?

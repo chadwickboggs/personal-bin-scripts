@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]]; then
+	echo "One argument is expected."
+	echo "USAGE: poll_publish_code <hostname of destination."
+	echo
+	exit 1
+fi
+
+echo -n "Enter new code: "
+
+while read x; do
+	$(dirname $0)/publish_code $x $1
+	echo -n "Enter new code: "
+done
+
+exit $?

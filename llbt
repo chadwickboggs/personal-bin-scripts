@@ -1,0 +1,5 @@
+#!/bin/bash
+
+llt ~/back/$1
+
+exit $?

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "A filename must be provided."
+	exit 1
+fi
+
+the_filename="$1"
+the_trimmedname=$(echo "${the_filename}" | sed 's/\(.*\)\..*$/\1/')
+exit_code=$?
+
+echo ${the_trimmedname}
+
+exit $exit_code

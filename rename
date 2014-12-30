@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $# != 2 ]]; then
+	echo 'Two arguments expected'
+	exit 1
+fi
+
+mv -v "$1" "$(dirname $1)/$(basename $2)"
+
+exit $?

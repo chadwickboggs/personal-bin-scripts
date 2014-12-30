@@ -1,0 +1,10 @@
+#!/bin/bash
+
+n=0
+if [ "$1" == "-a" ]; then
+	lspargs="$1 $2"; ((n++)); shift; shift
+fi
+
+lsp ${lspargs} "find ${*:n}" | grep -vf ~/stuff/grep_excludes_for_lspf.txt | sort -ud | grep -v '^\.\/'
+
+exit $?

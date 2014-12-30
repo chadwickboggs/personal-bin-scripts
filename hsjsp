@@ -1,0 +1,56 @@
+#!/bin/bash
+
+deployfolder="./deploy"
+cjd="005f"
+
+args=`getopt -o td: -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+		-t) shift; cjd="$1"; shift;;
+		-d) shift; deployfolder="$1"; shift;;
+		--) shift; break;;
+		*) echo "Internal error!"; exit 1;;
+  esac
+done
+
+if [ -z "$1" ]; then
+	echo "Usage: $(basename "$0") [-d <deploy folder>]<filename>"
+	exit 1
+fi
+
+filename=$(basename "$1")
+fmfs=$(find . -name "$filename"|tail -r)
+
+gg=$(echo $fmfs|grep ' ')
+if [ -z "$gg" ]; then
+	echo "Fewer than two copies of the specified file where found: $1"
+	exit 1
+fi
+
+echo -n "  copying "
+cp -v $fmfs
+
+retval=$?
+
+sed_sub="s/_/_$cjd/g"
+cdf_find_pattern=$(echo "${filename%.jsp}"|sed "$sed_sub")_jsp.*
+cdfs=$(find "$deployfolder" -name "$cdf_find_pattern")
+
+if [ -z "$cdfs" ]; then
+	echo -n ""
+#	echo "Unable to find the complied deployed filenames \"$cdf_find_pattern\".  Exiting."
+#	exit 1
+else
+	for cdf in $cdfs; do
+		echo -n "  removing "
+		rm -v "$cdf"
+
+		if [ $? != 0 ]; then
+			echo "Unable to rm the complied deployed file \"$compiled_deployed_files\".  Exiting."
+			exit 1
+		fi
+	done
+fi
+
+exit $retval

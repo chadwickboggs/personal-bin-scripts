@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "A filename must be provided."
+	exit 1
+fi
+
+the_filename="$1"
+
+the_extension=$(echo "${the_filename}" | sed 's/.*\.\(tar\..*\)$/\1/')
+if [ ${#the_extension} -eq ${#the_filename} ]; then
+	the_extension=$(echo "${the_filename}" | sed 's/.*\.\(.*\)$/\1/')
+fi
+
+echo ${the_extension}
+
+exit $?

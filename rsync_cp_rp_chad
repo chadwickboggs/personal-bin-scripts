@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo -n '<'
+/Users/chad/bin/now -n
+echo -n '>'
+
+echo -n '/Users/chad/bin/rsync_cp /Users/chad /Volumes/RP/Users/.'
+/Users/chad/bin/rsync_cp /Users/chad /Volumes/RP/Users/.
+exit_code=$?
+
+echo -n '</'
+/Users/chad/bin/now -n
+echo '>'
+
+exit $exit_code

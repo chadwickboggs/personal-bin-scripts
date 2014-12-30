@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [[ $# -ne 2 ]]; then
+	echo "Two arguments are required."
+	echo "USAGE: publish_code <new code> <destination hostname>"
+	echo
+	exit 1
+fi
+
+last_code=$(cat ~/stuff/last_code.txt)
+
+replace -s ${last_code} $1 -- ~/stuff/index.html
+
+scp -q ~/stuff/index.html root@$2:/var/www/html/code/.
+exit_code=$?
+
+echo "$last_code" >> ~/log/publish_code.log
+
+echo -n "$1" > ~/stuff/last_code.txt
+
+exit $exit_code

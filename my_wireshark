@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/Applications/Wireshark.app/Contents/MacOS/Wireshark $*
+
+exit $?

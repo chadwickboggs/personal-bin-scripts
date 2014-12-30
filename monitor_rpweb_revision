@@ -1,0 +1,23 @@
+#!/bin/bash
+
+rpweb_revision_file="/tmp/rpweb.revision.txt"
+rpweb_revision_0_file="/tmp/rpweb.revision.0.txt"
+
+touch ${rpweb_revision_0_file}
+
+while (true); do
+	svn info https://athena.redprairie.com/svn/prod/rpweb/branches/edge | grep 'Revision: ' | sed 's/Revision: //' > /tmp/rpweb.revision.txt
+
+	aa=$(diff ${rpweb_revision_file} ${rpweb_revision_0_file})
+
+	if [ -n "${aa}" ]; then
+		nowp=$(now)
+		echo "At ${nowp} RP-Web Revision changed from \"$(cat ${rpweb_revision_0_file})\" to \"$(cat ${rpweb_revision_file})\"."
+	fi
+
+	cp ${rpweb_revision_file} ${rpweb_revision_0_file}
+
+	sleep 60
+done
+
+exit $?

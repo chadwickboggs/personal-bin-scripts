@@ -1,0 +1,11 @@
+#!/bin/bash
+
+now=$(date -u +%Y%m%d%H%M%S)
+
+if [[ $# > 0 && "$1" == '-n' ]]; then
+	echo -n $now | tr -d '\n'
+else
+	echo $now
+fi
+
+exit $?

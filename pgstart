@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#
+# The following script executes the "create database" SQL.
+#
+# initdb /opt/local/var/db/postgresql84/defaultdb -E utf8
+#
+
+#
+# Two ways to start:
+#
+
+# 1: Forground
+sudo su postgres -c 'postgres -D /opt/local/var/db/postgresql84/defaultdb'
+
+# 2: Background
+#pg_ctl -D /opt/local/var/db/postgresql84/defaultdb -l logfile start
+
+exit $?

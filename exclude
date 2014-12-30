@@ -1,0 +1,15 @@
+#!/bin/bash
+
+for x in $*; do
+	if [[ -z "$expr" ]]; then
+		expr="($x)"
+	else
+		expr="$expr|($x)"
+	fi
+done
+
+if [[ -n "$expr" ]]; then
+	egrep -v "$expr"
+fi
+
+exit $?

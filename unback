@@ -1,0 +1,60 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "The backup filename must be provided."
+	exit 1
+fi
+
+the_filename="$1"
+
+the_extension=$(echo "${the_filename}" | sed 's/.*\.\(tar\..*\)$/\1/')
+if [ ${#the_extension} -eq ${#the_filename} ]; then
+	the_extension=$(echo "${the_filename}" | sed 's/.*\.\(.*\)$/\1/')
+fi
+
+if [[ "jar" == "${the_extension}" || "kar" == "${the_extension}" || "war" == "${the_extension}" || "ear" == "${the_extension}" ]]; then
+	jar xf "${the_filename}"
+
+elif [ "7z" == "${the_extension}" ]; then
+	7z x "${the_filename}"
+elif [ "rar" == "${the_extension}" ]; then
+	7z x "${the_filename}"
+elif [ "lz" == "${the_extension}" ]; then
+	plzip -d "${the_filename}"
+
+elif [[ "lzo" == "${the_extension}" || "lzop" == "${the_extension}" ]]; then
+	lzop -x "${the_filename}"
+
+elif [ "lrz" == "${the_extension}" ]; then
+	lrzip -d "${the_filename}"
+elif [ "gz" == "${the_extension}" ]; then
+	gzip -xf "${the_filename}"
+elif [ "xz" == "${the_extension}" ]; then
+	xz -d "${the_filename}"
+elif [ "lzma" == "${the_extension}" ]; then
+	xz -d "${the_filename}"
+elif [ "rz" == "${the_extension}" ]; then
+	rzip -d "${the_filename}"
+elif [ "zip" == "${the_extension}" ]; then
+	unzip -q "${the_filename}"
+
+elif [[ "tgz" == "${the_extension}" || "tar" == "${the_extension}" ]]; then
+	tar xf "${the_filename}"
+elif [[ "tgz" == "${the_extension}" || "tar.gz" == "${the_extension}" ]]; then
+	tar xzf "${the_filename}"
+elif [[ "bz2" == "${the_extension}" || "tbz" == "${the_extension}" || "tar.bz2" == "${the_extension}" ]]; then
+	tar xjf "${the_filename}"
+elif [[ "tlz" == "${the_extension}" || "tar.lz" == "${the_extension}" ]]; then
+	tar --use-compress-program=plzip -xf "${the_filename}"
+elif [[ "txz" == "${the_extension}" || "tar.xz" == "${the_extension}" || "tar.lzma" == "${the_extension}" ]]; then
+	tar --use-compress-program=xz -d "${the_filename}"
+elif [[ "tlzo" == "${the_extension}" || "tar.lzo" == "${the_extension}" || "tar.lzop" == "${the_extension}" ]]; then
+	tar --use-compress-program=lzop -xf "${the_filename}"
+elif [[ "tlrz" == "${the_extension}" || "tar.lrz" == "${the_extension}" ]]; then
+	lrzuntar "${the_filename}"
+
+else
+	echo "File extension not recognized: \"${the_extension}\"."
+fi
+
+exit $?

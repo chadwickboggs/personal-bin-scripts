@@ -1,0 +1,7 @@
+#!/bin/bash
+
+MOU_HOME="/Applications/Mou.app"
+
+${MOU_HOME}/Contents/MacOS/Mou
+
+exit $?

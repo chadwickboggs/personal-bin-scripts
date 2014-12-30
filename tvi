@@ -1,0 +1,5 @@
+#!/bin/bash
+
+term -t vi $* &
+
+exit $?

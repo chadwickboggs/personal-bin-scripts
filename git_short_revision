@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -n "$1" ]; then
+	name="$1"
+else
+	name="."
+fi
+
+if [[ -d "${name}" && -d "${name}"/.git ]]; then
+	git log --pretty=format:'%h' -n 1
+else
+	exit
+fi
+
+exit $?

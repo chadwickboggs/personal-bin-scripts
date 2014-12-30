@@ -1,0 +1,5 @@
+#!/bin/bash
+
+~/dev/NtrUtil/bin/ntrutil $* | lzop -c -9
+
+exit $?
