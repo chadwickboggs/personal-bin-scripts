@@ -2,18 +2,15 @@
 
 echo
 echo sshfss nwt@nwtapp-dt-a1s.ula.comcast.net:/app/home/nwt ~/mnt/nwtapp-dt-a1s.ula
+echo sshfss nwt@nwtapp-ch2-a13p.sys.comcast.net:/app/home/nwt ~/mnt/nwtapp-ch2-a13p.sys
+echo sshfss nwt@nwtapp-ch2-a14p.sys.comcast.net:/app/home/nwt ~/mnt/nwtapp-ch2-a14p.sys
+echo sshfss nwt@nwtapp-ch2-a15p.sys.comcast.net:/app/home/nwt ~/mnt/nwtapp-ch2-a15p.sys
 echo
 echo sshfss cboggs001c@nwtapp-ch2-a13p.sys.comcast.net:/home/cboggs001c ~/mnt/nwtapp-ch2-a13p.sys
 echo
 #echo sshfss -o ssh_command=\'ssh -i /Users/cboggs/.ssh/kp_20140729.pem\' ec2-user@ec2-54-88-136-75.compute-1.amazonaws.com:/home/ec2-user /Users/cboggs/mnt/chadwickboggs.com
 #echo
 echo sshfss chad@chadwickboggs.com:/home/chad ~/mnt/chadwickboggs.com
-echo
-echo sshfss chad@192.168.137.172:/home/chad ~/mnt/chadwickboggs.com-local
-echo
-echo sshfss cboggs@172.16.213.130:/home/cboggs /Users/cboggs/mnt/fcl-20
-echo
-echo sshfss cboggs@172.16.213.131:/home/cboggs /Users/cboggs/mnt/fcl-21
 echo
 #echo sshfss Administrator@192.168.154.152:/home/Administrator /Users/cboggs/mnt/win2012local
 #echo

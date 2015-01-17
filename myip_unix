@@ -1,5 +1,0 @@
-#!/bin/bash
-
-ifconfig|grep 'inet '|head -n 1|sed 's/        inet \(.*\)  netmask.*/\1/'
-
-exit $?
