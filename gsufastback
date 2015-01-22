@@ -33,7 +33,7 @@ git_revision=$(git_short_revision "${the_target}")
 
 if [ -n "${git_revision}" ]; then
 	the_filename="${target_folder}/${the_name}.rev${git_revision}.$(now).untracked${message}.tlzo"
-	the_unknown_files=$(git_status_files -c ??)
+	the_unknown_files=$(git_status_files -c '?? ')
 else
 	the_filename="${target_folder}/${the_name}.$(now).untracked${message}.tlzo"
 	the_unknown_files="*"
