@@ -28,7 +28,7 @@ elif [[ "lzo" == "${the_extension}" || "lzop" == "${the_extension}" ]]; then
 elif [ "lrz" == "${the_extension}" ]; then
 	lrzip -d "${the_filename}"
 elif [ "gz" == "${the_extension}" ]; then
-	gzip -xf "${the_filename}"
+	gunzip -f "${the_filename}"
 elif [ "xz" == "${the_extension}" ]; then
 	xz -d "${the_filename}"
 elif [ "lzma" == "${the_extension}" ]; then
