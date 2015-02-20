@@ -1,5 +1,5 @@
 #!/bin/bash
 
-/opt/local/bin/rsync -uaEz --del $@
+/opt/local/bin/rsync -uaXNSEz -q --del $@
 
 exit $?
