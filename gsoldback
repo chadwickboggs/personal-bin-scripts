@@ -1,12 +1,27 @@
 #!/bin/bash
 
-args=`getopt -o "f:m:t:" -l "folder,message" -- "$@"`
+TARGET_DEFAULT="~/back"
+
+USAGE="$(basename $0) <options> \n
+\n
+\t	Backup files and folders. \n
+\n
+\t	Options \n
+\n
+\t\t		[-h|--help]\t\t\t\t			This message gets printed only. \n
+\t\t		[-m|--message] <the message>\t	The message to encode into the filename.  Default: \"\" \n
+\t\t		[-f|--folder] <the folder>\t	The file or folder to backup  Default: \".\" \n
+\t\t		[-t|--target] <the target>\t	The target folder to output the backup file into.  Default: \"${TARGET_DEFAULT}\" \n
+"
+
+args=`getopt -o "hf:m:t:" -l "help,folder,message" -- "$@"`
 eval set -- "$args"
 while true; do
   case "$1" in
-		-m) shift; message=".$1"; shift;;
-		-f) shift; folder="$1"; shift;;
-		-t) shift; target="$1"; shift;;
+		-h | --help) 	echo -e ${USAGE}; exit;;
+		-m | --message) shift; message=".$1"; shift;;
+		-f | --folder)  shift; folder="$1"; shift;;
+		-t | --target)  shift; target="$1"; shift;;
 		--) shift; break;;
 		*) echo "Internal error!"; exit 1;;
   esac
@@ -20,7 +35,7 @@ else
 	the_target="."
 fi
 
-target_folder=~/back
+target_folder=${TARGET_DEFAULT}
 if [ -n "${target}" ]; then
 	target_folder="${target_folder}/${target}"
 fi

@@ -8,8 +8,8 @@ args=`getopt -o "c:h" -l "characters:,help" -- "$@"`
 eval set -- "$args"
 while true; do
   case "$1" in
-		-c)	shift; characters="$1";	shift;;
-		-h)	echo "${USAGE}";	exit 0;;
+		-h | --help)		echo "${USAGE}"; exit 0;;
+		-c | --characters)	shift; characters="$1";	shift;;
 		--)	shift;			break;;
 		*)	echo "${USAGE}";	exit 1;;
   esac
