@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ~/dev/NtrUtil/bin/ntrutil $* | lzop -c -9
 

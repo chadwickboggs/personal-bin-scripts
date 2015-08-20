@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "This script does not work because it can not export to the calling shell and can not be sourced because it takes command line parameters."
 exit 1

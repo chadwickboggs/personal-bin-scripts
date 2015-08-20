@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 USAGE="git_status_files -c <the \"git status -s\" output characters>"
 

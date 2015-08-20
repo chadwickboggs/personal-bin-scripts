@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export MAVEN_OPTS="-agentpath:${YJP_HOME}/bin/mac/libyjpagent.jnilib ${MAVEN_OPTS}"
 

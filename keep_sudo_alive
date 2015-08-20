@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 while true; do sudo touch /tmp; sleep 10; done
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 MOU_HOME="/Applications/Mou.app"
 

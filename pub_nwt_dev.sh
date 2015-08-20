@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 TOMCAT_INSTANCES_FOLDER="/opt/dev/apache/tomcat/instances"
 TOMCAT_VERSIONS=($(ls "${TOMCAT_INSTANCES_FOLDER}"))

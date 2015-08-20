@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 nwt_extract_msg.sh \
 	~/mnt/nwtapp-ch2-a13p.sys/apache-tomcat-7.0.54/logs/$1 \

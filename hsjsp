@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 deployfolder="./deploy"
 cjd="005f"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 excludes="grep -v '\/business\/'|grep -v '\/web\/'|grep -v '\/tmp\/'|grep -v '\/run\/'"
 

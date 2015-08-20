@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 scp -q NWT_Core_Services/src/main/webapp/WEB-INF/enunciate.xml jenkins@ossdev01:~/tmp/US352063/NWT_Core_Services/src/main/webapp/WEB-INF/. && \
 scp -q NWT_Core_UI/src/main/webapp/WEB-INF/enunciate.xml jenkins@ossdev01:~/tmp/US352063/NWT_Core_UI/src/main/webapp/WEB-INF/. && \

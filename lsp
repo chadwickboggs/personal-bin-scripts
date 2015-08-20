@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 help() {
   echo Options: -a  argument to pass to 'ls' command.

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 rpweb_revision_file="/tmp/rpweb.revision.txt"
 rpweb_revision_0_file="/tmp/rpweb.revision.0.txt"

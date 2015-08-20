@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export NSPR_LOG_MODULES=SMTP:4
 export NSPR_LOG_FILE=~/Desktop/tbird.log

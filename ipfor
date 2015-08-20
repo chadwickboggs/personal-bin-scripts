@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 host chadwickboggs.com | grep ' has address ' | sed 's/.* has address //'
 

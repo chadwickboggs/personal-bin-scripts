@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -z "$1" ]; then
 	echo "No number provided.  Please provide a number as a command line argument."

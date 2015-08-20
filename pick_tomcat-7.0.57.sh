@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 tc_version="7.0.57"
 
