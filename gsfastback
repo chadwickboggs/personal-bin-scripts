@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 TARGET_DEFAULT="~/back"
 
@@ -55,10 +55,21 @@ else
 fi
 
 if [[ (-z "${the_files}") ]]; then
-	echo "No files found for backup.."
+	echo "No files found for backup."
 	exit 0
 fi
 
-tar --use-compress-program=lzop -cf ${the_filename} ${the_files}
+cmd="tar --use-compress-program=lzop -cf ${the_filename} ${the_files}"
 
-exit $?
+#echo ${cmd}
+#bash -c "${cmd}"
+${cmd}
+
+exit_code=$?
+if [[ -n ${exit_code} ]]; then
+	echo "Error executing command.  Command:"
+	echo ${cmd}
+	exit ${exit_code}
+fi
+
+exit ${exit_code}

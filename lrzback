@@ -47,13 +47,16 @@ fi
 svn_revision=$(svn_revision "${the_target}")
 
 if [ -n "${svn_revision}" ]; then
-	lrztar -q -o "${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tlrz" "${the_target}"
+	cmd="lrztar -q -o ${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tlrz ${the_target}"
 	#tar -cf "${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tar" "${the_target}"
 	#lrzip -q -D "${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tar"
 else
-	lrztar -q -o "${target_folder}/${the_name}.$(now)${message}.tlrz" "${the_target}"
+	cmd="lrztar -q -o ${target_folder}/${the_name}.$(now)${message}.tlrz ${the_target}"
 	#tar -cf "${target_folder}/${the_name}.$(now)${message}.tar" "${the_target}"
 	#lrzip -q -D "${target_folder}/${the_name}.$(now)${message}.tar"
 fi
+
+echo "${cmd}"
+bash -c "${cmd}"
 
 exit $?

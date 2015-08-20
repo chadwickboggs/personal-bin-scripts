@@ -47,9 +47,12 @@ fi
 svn_revision=$(svn_revision "${the_target}")
 
 if [ -n "${svn_revision}" ]; then
-	tar --use-compress-program=lzop -cf "${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tlzo" "${the_target}"
+	cmd="tar --use-compress-program=lzop -cf ${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tlzo ${the_target}"
 else
-	tar --use-compress-program=lzop -cf "${target_folder}/${the_name}.$(now)${message}.tlzo" "${the_target}"
+	cmd="tar --use-compress-program=lzop -cf ${target_folder}/${the_name}.$(now)${message}.tlzo ${the_target}"
 fi
+
+echo "${cmd}"
+bash -c "${cmd}"
 
 exit $?

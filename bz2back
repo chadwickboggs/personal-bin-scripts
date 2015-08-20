@@ -47,9 +47,12 @@ fi
 svn_revision=$(svn_revision "${the_target}")
 
 if [ -n "${svn_revision}" ]; then
-	tar -cjf "${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tbz2" "${the_targt}"
+	cmd="tar -cjf ${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tbz2 ${the_targt}"
 else
-	tar -cjf "${target_folder}/${the_name}.$(now)${message}.tbz2" "${the_target}"
+	cmd="tar -cjf ${target_folder}/${the_name}.$(now)${message}.tbz2 ${the_target}"
 fi
+
+echo "${cmd}"
+bash -c "${cmd}"
 
 exit $?
