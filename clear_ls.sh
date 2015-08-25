@@ -3,4 +3,3 @@
 ls $* | parallel 'echo "" > "{}"'
 
 echo $?
-
