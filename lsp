@@ -17,8 +17,6 @@
 #done
 
 #cmd="ls ${lsargs} --color=never | parallel \"${*:n}\""
-cmd="ls --color=never | parallel $@"
-
-bash -c "${cmd}"
+ls --color=never -d */| parallel $@
 
 exit $?
