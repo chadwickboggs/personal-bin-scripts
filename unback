@@ -52,6 +52,8 @@ elif [[ "tlzo" == "${the_extension}" || "tar.lzo" == "${the_extension}" || "tar.
 	tar --use-compress-program=lzop -xf "${the_filename}"
 elif [[ "tlrz" == "${the_extension}" || "tar.lrz" == "${the_extension}" ]]; then
 	lrzuntar "${the_filename}"
+elif [[ "tbro" == "${the_extension}" || "tar.bro" == "${the_extension}" ]]; then
+	tar --use-compress-program=/opt/workspace/other/brotli/python/bro.py -xf "${the_filename}"
 
 else
 	echo "File extension not recognized: \"${the_extension}\"."
