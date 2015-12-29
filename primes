@@ -2,43 +2,52 @@
 
 USAGE="$(basename $0) <options> \n
 \n
-\t	Print all prime numbers less than or equal to the specified number. \n
+\t	Print all prime numbers between the two specified numbers. \n
 \n
 \t	Options \n
 \n
 \t\t		[-h|--help]\t\t\t				This message gets printed only. \n
-\t\t		[-n|--number] <the number>\t	The number to print all prime numbers less than or equal to. \n
+\t\t		[-n|--min] <the start number>\t	The start number, inclusive. \n
+\t\t		[-m|--max] <the end number>\t	The end number, inclusive. \n
 "
 
-args=`getopt -o "hn:" -l "help,number" -- "$@"`
+args=`getopt -o "hn:m:" -l "help,min,max" -- "$@"`
 eval set -- "$args"
 while true; do
   case "$1" in
 		-h | --help)	echo -e ${USAGE};	exit;;
-		-n | --number)	shift; number="$1";	shift;;
+		-n | --min)		shift; min="$1";	shift;;
+		-m | --max)		shift; max="$1";	shift;;
 		--) shift; break;;
 		*) echo "Internal error!"; exit 1;;
   esac
 done
 
-prime_1=0
-echo "1"
-echo "2"
-for ((i=3; i<=${number};)); do
-	for ((j=i-1; j>=2;)); do
-		if [ $(expr $i % $j) -ne 0 ]; then
-			prime_1=1
-		else
-			prime_1=0
+if [[ ${min}%2 -eq 0 ]]; then
+	min=$((${min} + 1))
+fi
+
+first_prime=2
+second_prime=3
+for ((i=${min}; i<=${max};)); do
+	sqrt_of_i=$(echo "sqrt($i)" | bc -l)
+	sqrt_of_i=${sqrt_of_i%.*}
+
+	is_prime=true
+	for ((j=${second_prime}; j<=${sqrt_of_i};)); do
+		if [[ ${i}%$j -eq 0 && $i -ne $j ]]; then
+			#echo prime=false i=$i j=$j
+			is_prime=false
 			break
 		fi
 
-		j=$(expr $j - 1)
+		j=$(($j + ${first_prime}))
 	done
-
-	if [ $prime_1 -eq 1 ]; then
+	if [[ $is_prime == true ]]; then
+		#echo is_prime=$is_prime
 		echo $i
 	fi
 
-	i=$(expr $i + 1)
+	i=$(($i + ${first_prime}))
 done
+
