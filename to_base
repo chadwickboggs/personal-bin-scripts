@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+base=10
+
+USAGE="$(basename $0) <options> \n
+\n
+\t	Convert input to the specified base between 2 and 36 each inclusive. \n
+\n
+\t	Options \n
+\n
+\t\t		[-h|--help]\t\t\t				This message gets printed only. \n
+\t\t		[-t|--target] <the target base>	The target base between 2 and 36 inclusive to convert the given number into.  Default: \"${base}\" \n
+\t\t		[-n|--number] <the number>\t	The number to convert. \n
+"
+
+args=`getopt -o "ht:n:" -l "help,target,number" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+		-h | --help)	echo -e ${USAGE};	exit;;
+		-t | --target)	shift; target="$1"; shift;;
+		-n | --number)	shift; number="$1";	shift;;
+		--) shift; break;;
+		*) echo "Internal error!"; exit 1;;
+  esac
+done
+
+result=""
+base36="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+while true; do
+	result=${base36:((${number}%${target})):1}${result}
+	if [ $((number=${number}/${target})) -eq 0 ]; then
+		break
+	fi
+done
+
+echo ${result}
+
