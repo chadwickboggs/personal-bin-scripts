@@ -5,7 +5,13 @@
 #	lspargs="$1 $2"; ((n++)); shift; shift
 #fi
 
-#lsp ${lspargs} "find ${*:n}" | grep -vf ~/stuff/grep_excludes_for_lspf.txt | sort -ud | grep -v '^\.\/'
-lsp "find $@" | grep -vf ~/stuff/grep_excludes_for_lspf.txt | sort -ud | grep -v '^\.\/'
+grep_excludes_file="~/stuff/grep_excludes_for_lspf.txt "
+
+if [[ -e grep_excludes_file ]]; then
+	#lsp ${lspargs} "find ${*:n}" | grep -vf ~/stuff/grep_excludes_for_lspf.txt | sort -ud | grep -v '^\.\/'
+	lsp "find $@" | grep -vf "${grep_excludes_file}" | sort -ud | grep -v '^\.\/'
+else
+	lsp "find $@" | sort -ud | grep -v '^\.\/'
+fi
 
 exit $?
