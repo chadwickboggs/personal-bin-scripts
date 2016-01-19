@@ -7,7 +7,7 @@ else
 fi
 
 if [[ -d "${name}" && -d "${name}"/.git ]]; then
-	git log --pretty=format:'%H' -n 1
+	git log --pretty=format:'%H' | head -n 1
 else
 	exit
 fi
