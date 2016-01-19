@@ -63,7 +63,7 @@ fi
 
 cmd="tar --use-compress-program=$brotli -cf ${the_filename} ${the_files}"
 
-#echo ${cmd}
+#echo ${cmd}; exit
 #bash -c "${cmd}"
 eval ${cmd}
 
