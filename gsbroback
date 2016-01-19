@@ -27,6 +27,8 @@ while true; do
   esac
 done
 
+brotli="/opt/workspace/thrid_party/brotli/python/bro.py"
+
 if [ -n "${folder}" ]; then
 	the_name="$(basename "${folder}")"
 	the_target="${folder}"
@@ -59,7 +61,7 @@ if [[ (-z "${the_files}") ]]; then
 	exit 0
 fi
 
-cmd="tar --use-compress-program=brotli -cf ${the_filename} ${the_files}"
+cmd="tar --use-compress-program=$brotli -cf ${the_filename} ${the_files}"
 
 #echo ${cmd}
 #bash -c "${cmd}"
