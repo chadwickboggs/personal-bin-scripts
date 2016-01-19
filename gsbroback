@@ -59,7 +59,7 @@ if [[ (-z "${the_files}") ]]; then
 	exit 0
 fi
 
-cmd="tar --use-compress-program=/opt/workspace/other/brotli/python/bro.py -cf ${the_filename} ${the_files}"
+cmd="tar --use-compress-program=brotli -cf ${the_filename} ${the_files}"
 
 #echo ${cmd}
 #bash -c "${cmd}"

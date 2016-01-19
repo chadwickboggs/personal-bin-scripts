@@ -47,9 +47,9 @@ fi
 svn_revision=$(svn_revision "${the_target}")
 
 if [ -n "${svn_revision}" ]; then
-	cmd="tar --use-compress-program=/opt/workspace/other/brotli/python/bro.py -cf ${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tbr ${the_target}"
+	cmd="tar --use-compress-program=brotli -cf ${target_folder}/${the_name}.rev-${svn_revision}.$(now)${message}.tbr ${the_target}"
 else
-	cmd="tar --use-compress-program=/opt/workspace/other/brotli/python/bro.py -cf ${target_folder}/${the_name}.$(now)${message}.tbr ${the_target}"
+	cmd="tar --use-compress-program=brotli -cf ${target_folder}/${the_name}.$(now)${message}.tbr ${the_target}"
 fi
 
 echo "${cmd}"
