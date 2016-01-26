@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+/opt/local/bin/rsync -uaXNSEz -q --del $@
+
+exit $?
