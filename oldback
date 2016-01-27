@@ -19,7 +19,7 @@ eval set -- "$args"
 while true; do
   case "$1" in
 		-h | --help) 	echo -e ${USAGE}; exit;;
-		-m | --message) shift; message=".$1"; shift;;
+		-m | --message) shift; message="$1"; shift;;
 		-f | --folder)  shift; folder="$1"; shift;;
 		-t | --target)  shift; target="$1"; shift;;
 		--) shift; break;;

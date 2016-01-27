@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
 
-#n=0
-#if [ "$1" == "-a" ]; then
-	#lspargs="$1 $2"; ((n++)); shift; shift
-#fi
-
 if [[ -f "~/stuff/grep_excludes.txt" ]]; then
-	#lsp ${lspargs} "grep -r ${*:n}" | grep -vf ~/stuff/grep_excludes.txt | sort -ud | grep -v '^\.\/'
-	lsp "grep -r $@" | grep -vf ~/stuff/grep_excludes.txt | sort -ud | grep -v '^\.\/'
+	lsp "grep -r $@" | grep -vf ~/stuff/grep_excludes.txt | sort -ud
 else 
-	#lsp ${lspargs} "grep -r ${*:n}" | sort -ud | grep -v '^\.\/'
-	lsp "grep -r $@" | sort -ud | grep -v '^\.\/'
+	lsp "grep -r $@" | sort -ud
 fi
 
 exit $?

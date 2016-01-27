@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
-#n=0
-#if [ "$1" == "-a" ]; then
-#	lspargs="$1 $2"; ((n++)); shift; shift
-#fi
+grep_excludes_file="~/stuff/grep_excludes_for_lspf.txt"
 
-grep_excludes_file="~/stuff/grep_excludes_for_lspf.txt "
-
-if [[ -e grep_excludes_file ]]; then
-	#lsp ${lspargs} "find ${*:n}" | grep -vf ~/stuff/grep_excludes_for_lspf.txt | sort -ud | grep -v '^\.\/'
-	lsp "find $@" | grep -vf "${grep_excludes_file}" | sort -ud | grep -v '^\.\/'
+if [[ -f "${grep_excludes_file}" ]]; then
+	lsp "find $@" | grep -vf "${grep_excludes_file}" | sort -ud
 else
-	lsp "find $@" | sort -ud | grep -v '^\.\/'
+	lsp "find $@" | sort -ud
 fi
 
 exit $?
