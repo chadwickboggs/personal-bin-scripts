@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ -f "~/stuff/grep_excludes.txt" ]]; then
-	lsp "grep -r $@" | grep -vf ~/stuff/grep_excludes.txt | sort -ud
+grep_excludes_file="${HOME}/stuff/grep_excludes.txt"
+
+if [[ -f "${grep_excludes_file}" ]]; then
+	lsp "grep -r --exclude-from=${grep_excludes_file} $@" | sort -ud
 else 
 	lsp "grep -r $@" | sort -ud
 fi

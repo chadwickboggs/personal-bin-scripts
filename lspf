@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-grep_excludes_file="~/stuff/grep_excludes_for_lspf.txt"
+grep_excludes_file="${HOME}/stuff/grep_excludes_for_lspf.txt"
 
 if [[ -f "${grep_excludes_file}" ]]; then
 	lsp "find $@" | grep -vf "${grep_excludes_file}" | sort -ud
