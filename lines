@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+start_number=1
+line_count=1
+
+USAGE="$(basename $0) <options> \n
+\n
+\t      Display the specified lines. \n
+\n
+\t      Options \n
+\n
+\t\t            [-h|--help]\t\t\t\t					This message gets printed only. \n
+\t\t            [-s|--start] <start line number>\t	The start line number.  Default: \"${start_number}\" \n
+\t\t            [-c|--count] <number of lines>\t\t	The number of lines to diplay.  Default: \"${line_count}\" \n
+"
+
+args=`getopt -o "hs:c:" -l "help,start,count" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+                -h | --help)	echo -e ${USAGE}; exit;;
+                -s | --start)	shift; start_number="$1"; shift;;
+                -c | --count)	shift; line_count="$1"; shift;;
+                --) shift; break;;
+                *) echo "Internal error!"; exit 1;;
+  esac
+done
+
+head -n $((${line_count} + ${start_number})) | tail -n ${line_count}
+
