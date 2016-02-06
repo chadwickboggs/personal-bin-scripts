@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+folders='*'
+action='pwd'
+
+USAGE="$(basename $0) <options> \n
+\n
+\t      Perform the given action in the specified folders. \n
+\n
+\t      Options \n
+\n
+\t\t            [-h|--help]\t\t\t\t                     This message gets printed only. \n
+\t\t            [-f|--folders] <the folders>\t  Each folder to perform the specified action in.  Default: \"${folders}\" \n
+\t\t            [-a|--action] <the action>\t    The action to perform.  Default: \"${action}\" \n
+"
+
+args=`getopt -o "hf:a:" -l "help,folders,action" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+                -h | --help)    echo -e ${USAGE}; exit;;
+                -f | --folders)  shift; folders="$1"; shift;;
+                -a | --action)  shift; action="$1"; shift;;
+                --) shift; break;;
+                *) echo "Internal error!"; exit 1;;
+  esac
+done
+
+lsp -a "${folders}" "cd {}; ${action}"
+
