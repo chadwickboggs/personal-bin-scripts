@@ -6,27 +6,27 @@ sf_name='.'
 use_unison=false
 declare -a folders=('.')
 
-USAGE="$(basename $0) <options> <command line> \n
+USAGE="$(basename $0) <options> <command line>
 \n
-\t	Copy the union the contents of the specified files into each of them, unionizing them. \n
+\t	Copy the union the contents of the specified files into each of them, unionizing them.
 \n
-\t	Options \n
-\n
-\t\t		[-h|--help]\t\t\t\t		This message gets printed only. \n
-\t\t		[-s|--subfolder]		<the subfolder>\t	The subfolder to unionize.  Default: \"${sf_name}\" \n
-\t\t		[-u|--unison]			<use unison>\t	Use unison instead of rsync.  Default: \"${use_unison}\" \n
-\t\t		command line			\t\t\t\t	The folders to unionize.  Default: \"${folders[@]}\" \n
+\t	Options:
+\t\t		[-h|--help]\t\t\t\t		This message gets printed only.
+\t\t		[-s|--subfolder]		<the subfolder>\t	The subfolder to unionize.  Default: \"${sf_name}\"
+\t\t		[-u|--unison]			<use unison>\t	Use unison instead of rsync.  Default: \"${use_unison}\"
+\t\t		command line			\t\t\tThe folders to unionize.  Default: \"${folders[@]}\"
 "
 
-args=`getopt -o "hs:u" -l "help,subfolder,unison" -- "$@"`
-eval set -- "$args"
+arguments=$(getopt -o 'hs:u' -l 'help,subfolder,unison' -- "$@")
+eval set -- "$arguments"
 while true; do
+echo "$1"
   case "$1" in
-		-h | --help)		echo -e ${USAGE};		exit;;
+		-h | --help)		echo -e "${USAGE}";		exit;;
 		-s | --subfolder)	shift; sf_name="$1";	shift;;
-		-u | --unison)		use_unison=true;	shift;;
-		--) shift; break;;
-		*) echo "Internal error!"; exit 1;;
+		-u | --unison)		use_unison=true;		shift;;
+		--)					shift;					break;;
+		*)					echo "Internal error!";	exit 1;;
   esac
 done
 
