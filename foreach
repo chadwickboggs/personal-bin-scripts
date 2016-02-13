@@ -2,7 +2,8 @@
 
 folders='*'
 action='pwd'
-inserial=false
+inparallel=false
+quiet=false
 
 USAGE="$(basename $0) <options> \n
 \n
@@ -10,36 +11,46 @@ USAGE="$(basename $0) <options> \n
 \n
 \t      Options \n
 \n
-\t\t            [-h|--help]\t\t\t                     This message gets printed only. \n
-\t\t            [-f|--folders] <the folders>\t  Each folder to perform the specified action in.  Default: \"${folders}\" \n
-\t\t            [-a|--action] <the action>\t    The action to perform.  Default: \"${action}\" \n
-\t\t            [-s|--serial] <serial>\t    Execute action serially, not parallelly.  Default: \"${inserial}\" \n
+\t\t            [-h|--help]\t\t\t\t						This message gets printed only. \n
+\t\t            [-f|--folders] <the folders>\t\t		Each folder to perform the specified action in.  Default: \"${folders}\" \n
+\t\t            [-a|--action] <the action>\t\t			The action to perform.  Default: \"${action}\" \n
+\t\t            [-p|--parallel] <parallel executions>\t	Execute action in parallel instead of sequentially.  Default: \"${inparallel}\" \n
+\t\t            [-q|--quiet] <quiet output>\t\t	    	Output mininal information.  Default: \"${quiet}\" \n
 "
 
-args=`getopt -o "hf:a:s" -l "help,folders,action,serial" -- "$@"`
+args=`getopt -o "hf:a:pq" -l "help,folders,action,parallel,quiet" -- "$@"`
 eval set -- "$args"
 while true; do
   case "$1" in
-                -h | --help)    echo -e ${USAGE}; exit;;
-                -f | --folders)  shift; folders="$1"; shift;;
-                -a | --action)  shift; action="$1"; shift;;
-                -s | --serial)  shift;;
-                --) shift; break;;
-                *) echo "Internal error!"; exit 1;;
+                -h | --help)		echo -e ${USAGE}; exit;;
+                -f | --folders)		shift; folders="$1"; shift;;
+                -a | --action)		shift; action="$1"; shift;;
+                -p | --parallel)	inparallel=true; shift;;
+                -q | --quiet)		quiet=true; shift;;
+                --)					shift; break;;
+                *)					echo "Internal error!"; exit 1;;
   esac
 done
 
-if [[ -f "foreach_order.txt" ]]; then
-	if [[ ${inserial} ]]; then
-		cat foreach_order.txt | while read x; do bash -c "cd $x; ${action}"; done
+if [[ ${quiet} != true ]]; then
+	if [[ ${inparallel} == true ]]; then
+		echo "Executing action in parallel within target folders."
 	else
+		echo "Executing action sequentially within target folders."
+	fi
+fi
+
+if [[ -f "foreach_order.txt" ]]; then
+	if [[ ${inparallel} == true ]]; then
 		lsp -a "$(cat foreach_order.txt)" "cd {}; ${action}"
+	else
+		cat foreach_order.txt | while read x; do bash -c "cd $x; ${action}"; done
 	fi
 else
-	if [[ ${inserial} ]]; then
-		echo ${folders} | while read x; do bash -c "cd $x; ${action}"; done
-	else
+	if [[ ${inparallel} == true ]]; then
 		lsp -a "${folders}" "cd {}; ${action}"
+	else
+		echo ${folders} | while read x; do bash -c "cd $x; ${action}"; done
 	fi
 fi
 
