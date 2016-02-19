@@ -23,3 +23,4 @@ done
 ls --color=never -d ${lsargs} | parallel $@
 
 exit $?
+
