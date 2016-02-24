@@ -40,17 +40,19 @@ if [[ ${quiet} != true ]]; then
 	fi
 fi
 
+exit_code=0
+
 if [[ -f "foreach_order.txt" ]]; then
 	if [[ ${inparallel} == true ]]; then
 		lsp -a "$(cat foreach_order.txt)" "cd {}; ${action}"; exit_code=$?
 	else
-		cat foreach_order.txt | while read x; do bash -c "cd $x; ${action}"; done; exit_code=$?
+		cat foreach_order.txt | while read x; do cd $x; ${action}; exit_code=$((${exit_code} + $?)); done
 	fi
 else
 	if [[ ${inparallel} == true ]]; then
 		lsp -a "${folders}" "cd {}; ${action}"; exit_code=$?
 	else
-		echo ${folders} | while read x; do bash -c "cd $x; ${action}"; done; exit_code=$?
+		echo ${folders} | while read x; do cd $x; ${action}; exit_code=$((${exit_code} + $?)); done
 	fi
 fi
 
