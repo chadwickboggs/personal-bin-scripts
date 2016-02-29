@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+RUN_FOLDER=$(pwd)
+
 folders='*'
 action='pwd'
 inparallel=false
@@ -46,13 +48,13 @@ if [[ -f "foreach_order.txt" ]]; then
 	if [[ ${inparallel} == true ]]; then
 		lsp -a "$(cat foreach_order.txt)" "cd {}; ${action}"; exit_code=$?
 	else
-		cat foreach_order.txt | while read x; do cd $x; ${action}; exit_code=$((${exit_code} + $?)); done
+		cat foreach_order.txt | while read x; do echo "${RUN_FOLDER}/$x"; cd "${RUN_FOLDER}/$x"; ${action}; exit_code=$((${exit_code} + $?)); done
 	fi
 else
 	if [[ ${inparallel} == true ]]; then
 		lsp -a "${folders}" "cd {}; ${action}"; exit_code=$?
 	else
-		echo ${folders} | while read x; do cd $x; ${action}; exit_code=$((${exit_code} + $?)); done
+		echo ${folders} | while read x; do echo "${RUN_FOLDER}/$x"; cd "${RUN_FOLDER}/$x"; ${action}; exit_code=$((${exit_code} + $?)); done
 	fi
 fi
 
