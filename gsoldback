@@ -42,6 +42,7 @@ fi
 
 if [ -n "${message}" ]; then
 	message=$(echo "${message}" | tr ' ' '_')
+	message=".${message}"
 fi
 
 git_revision=$(getGitShortRevision "${the_target}")
