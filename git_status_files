@@ -2,7 +2,8 @@
 
 USAGE="git_status_files -c <the \"git status -s\" output characters>"
 
-characters='[ |A|M|R|D|C][ |A|M|R|D|C] '
+#characters='[ |A|M|R|D|C][ |A|M|R|D|C] '
+characters='[ |A|M|R|C][ |A|M|R|C] '
 
 args=`getopt -o "c:h" -l "characters:,help" -- "$@"`
 eval set -- "$args"

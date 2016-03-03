@@ -27,7 +27,7 @@ while true; do
   esac
 done
 
-brotli="/opt/workspace/thrid_party/brotli/python/bro.py"
+brotli="/opt/workspace/third_party/brotli/python/bro.py"
 
 if [ -n "${folder}" ]; then
 	the_name="$(basename "${folder}")"
