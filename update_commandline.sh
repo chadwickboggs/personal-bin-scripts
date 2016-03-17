@@ -9,6 +9,7 @@ sudo nice port upgrade outdated
 #sudo nice fink -qy update-all
 #sudo nice fink -qy index -f
 
-sudo nice gem2.1 update
+sudo nice npm upgrade
+sudo nice gem update
 
 exit $?
