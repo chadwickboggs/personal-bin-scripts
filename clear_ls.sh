@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-ls $@ | parallel 'echo "" > "{}"'
+ls $@ | parallel 'echo -n "" > "{}"'
 
 echo $?
