@@ -18,7 +18,7 @@ eval set -- "$args"
 while true; do
   case "$1" in
 		-h | --help)	echo -e ${USAGE};	exit;;
-		-t | --target)	shift; target="$1"; shift;;
+		-t | --target)	shift; target="$1";	shift;;
 		-n | --number)	shift; number="$1";	shift;;
 		--) shift; break;;
 		*) echo "Internal error!"; exit 1;;

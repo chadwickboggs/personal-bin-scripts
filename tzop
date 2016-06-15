@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+filename="/tmp/$$.tmp"
+mkfifo ${filename}
+$(cat ${filename} | lzop > $1)
+tee ${filename}
+
