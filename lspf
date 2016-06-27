@@ -3,9 +3,14 @@
 grep_excludes_file="${HOME}/stuff/grep_excludes_for_lspf.txt"
 
 if [[ -f "${grep_excludes_file}" ]]; then
-	lsp "find $@" | grep -vf "${grep_excludes_file}" | sort -ud
+	cmd="lsp \"find $@\" | grep -vf \"${grep_excludes_file}\""
 else
-	lsp "find $@" | sort -ud
+	cmd="lsp \"find $@\""
 fi
+
+cmd="${cmd} | sort -ud"
+
+echo "	Executing \"${cmd}\""
+bash -c "${cmd}"
 
 exit $?

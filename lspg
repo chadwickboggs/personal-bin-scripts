@@ -3,9 +3,14 @@
 grep_excludes_file="${HOME}/stuff/grep_excludes.txt"
 
 if [[ -f "${grep_excludes_file}" ]]; then
-	lsp "grep -r --exclude-from=${grep_excludes_file} $@" | sort -ud
+	cmd="lsp \"grep -r --exclude-from=${grep_excludes_file} $@\""
 else 
-	lsp "grep -r $@" | sort -ud
+	cmd="lsp \"grep -r $@\""
 fi
+
+cmd="${cmd} | grep -v target | grep -v '\.git' | grep -v tunnel | grep -v '\.idea' | grep -v '\.log' | sort -ud"
+
+echo "	Executing \"${cmd}\""
+bash -c "${cmd}"
 
 exit $?
