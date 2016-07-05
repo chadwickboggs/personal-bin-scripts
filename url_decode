@@ -1,0 +1,12 @@
+#!/usr/bin/env groovy
+
+if (args.size() > 0) {
+	println URLDecoder.decode(args[0])
+
+	return 0
+}
+
+String inputLine = new BufferedReader(new InputStreamReader(System.in)).readLine()
+
+println URLDecoder.decode(inputLine)
+
