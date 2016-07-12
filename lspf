@@ -1,6 +1,28 @@
 #!/usr/bin/env bash
 
+USAGE="$(basename $0) <options> \n
+\n
+\t      Run \"find\" through \"lsp\". \n
+\n
+\t      Options \n
+\n
+\t\t            [-h|--help]\t	This message gets printed only. \n
+\t\t            [-q|--quiet]\t	Be quiet. \n
+"
+
+be_quiet=false
 grep_excludes_file="${HOME}/stuff/grep_excludes_for_lspf.txt"
+
+args=`getopt -o "hq" -l "help,quiet" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+                -h | --help)	echo -e ${USAGE}; exit;;
+                -q | --quiet)	be_quiet=true; shift;;
+                --) shift; break;;
+                *) echo "Internal error!"; exit 1;;
+  esac
+done
 
 if [[ -f "${grep_excludes_file}" ]]; then
 	cmd="lsp \"find $@\" | grep -vf \"${grep_excludes_file}\""
@@ -10,7 +32,8 @@ fi
 
 cmd="${cmd} | sort -ud"
 
-echo "	Executing \"${cmd}\""
+[[ ${be_quiet} == false ]] && echo "	Executing \"${cmd}\""
+
 bash -c "${cmd}"
 
 exit $?
