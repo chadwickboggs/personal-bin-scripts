@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+be_quiet=false
+dry_run=false
+
 USAGE="$(basename $0) <options> \n
 \n
 \t      Run \"find\" through \"lsp\". \n
@@ -8,31 +11,36 @@ USAGE="$(basename $0) <options> \n
 \n
 \t\t            [-h|--help]\t	This message gets printed only. \n
 \t\t            [-q|--quiet]\t	Be quiet. \n
+\t\t            [-n|--dryrun]\t	Do a dry run (do not execute). \n
 "
 
-be_quiet=false
 grep_excludes_file="${HOME}/stuff/grep_excludes_for_lspf.txt"
 
-args=`getopt -o "hq" -l "help,quiet" -- "$@"`
+args=$(getopt -o "hqn" -l "help,quiet,dryrun" -- "$@")
 eval set -- "$args"
 while true; do
   case "$1" in
-                -h | --help)	echo -e ${USAGE}; exit;;
-                -q | --quiet)	be_quiet=true; shift;;
-                --) shift; break;;
-                *) echo "Internal error!"; exit 1;;
+  		-h | --help)	echo -e ${USAGE}; exit;;
+        -q | --quiet)	be_quiet=true; shift;;
+        -n | --dryrun)	dry_run=true; shift;;
+        --) shift; break;;
+        *) echo "Internal error!"; exit 1;;
   esac
 done
 
+cmd="lsp"
+[[ ${be_quiet} == true ]] && cmd="${cmd} -q"
+
 if [[ -f "${grep_excludes_file}" ]]; then
-	cmd="lsp \"find $@\" | grep -vf \"${grep_excludes_file}\""
+	cmd="${cmd} \"find $@\" | grep -vf \"${grep_excludes_file}\""
 else
-	cmd="lsp \"find $@\""
+	cmd="${cmd} \"find $@\""
 fi
 
 cmd="${cmd} | sort -ud"
 
 [[ ${be_quiet} == false ]] && echo "	Executing \"${cmd}\""
+[[ ${dry_run} == true ]] && exit
 
 bash -c "${cmd}"
 

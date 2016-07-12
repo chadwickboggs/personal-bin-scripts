@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 lsargs=''
+be_quiet=false
+dry_run=false
 
 USAGE="$(basename $0) <options> \n
 \n
@@ -11,26 +13,31 @@ USAGE="$(basename $0) <options> \n
 \t\t            [-h|--help]\t	This message gets printed only. \n
 \t\t            [-a|--lsargs]\t	The arguments to pass to \"ls\" command.  Default: \"${lsargs}\" \n
 \t\t            [-q|--quiet]\t	Be quiet. \n
+\t\t            [-n|--dryrun]\t	Do a dry run (do not execute). \n
 "
 
-lsargs=''
-be_quiet=false
 grep_excludes_file="${HOME}/stuff/grep_excludes_for_lspf.txt"
 
-args=`getopt -o "hqa:" -l "help,quiet,lsargs" -- "$@"`
+args=$(getopt -o "hqna:" -l "help,quiet,dryrun,lsargs" -- "$@")
 eval set -- "$args"
 while true; do
   case "$1" in
         -h | --help)	echo -e ${USAGE}; exit;;
 		-a | --lsargs)	shift; lsargs="$1"; shift;;
         -q | --quiet)	be_quiet=true; shift;;
+        -n | --dryrun)	dry_run=true; shift;;
         --) shift; break;;
         *) echo "Internal error!"; exit 1;;
   esac
 done
 
 #ls --color=never -d ${lsargs} | parallel "$*"
-find -mindepth 1 -maxdepth 1 -type d ${lsargs} | parallel "$*"
+cmd="find -mindepth 1 -maxdepth 1 -type d ${lsargs} | parallel \"$*\""
+
+[[ ${be_quiet} == false ]] && echo "	Executing \"${cmd}\""
+[[ ${dry_run} == true ]] && exit
+
+bash -c "${cmd}"
 
 exit $?
 
