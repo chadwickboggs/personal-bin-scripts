@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+grep_excludes=$(cat "${HOME}/stuff/grep_excludes_v.txt")
+
 be_quiet=false
 dry_run=false
 
@@ -13,8 +15,6 @@ USAGE="$(basename $0) <options> \n
 \t\t            [-q|--quiet]\t	Be quiet. \n
 \t\t            [-n|--dryrun]\t	Do a dry run (do not execute). \n
 "
-
-grep_excludes_file="${HOME}/stuff/grep_excludes_for_lspf.txt"
 
 args=$(getopt -o "hqn" -l "help,quiet,dryrun" -- "$@")
 eval set -- "$args"
@@ -32,7 +32,7 @@ cmd="lsp"
 [[ ${be_quiet} == true ]] && cmd="${cmd} -q"
 
 if [[ -f "${grep_excludes_file}" ]]; then
-	cmd="${cmd} \"find $@\" | grep -vf \"${grep_excludes_file}\""
+	cmd="${cmd} \"find $@\" | grep -v \"${grep_excludes}\""
 else
 	cmd="${cmd} \"find $@\""
 fi

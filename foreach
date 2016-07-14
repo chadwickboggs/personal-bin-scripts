@@ -2,10 +2,14 @@
 
 RUN_FOLDER=$(pwd)
 
-folders='*'
+grep_excludes=$(cat "${HOME}/stuff/grep_excludes_v.txt")
+
+folders=$(find . -mindepth 1 -maxdepth 1 -type d | grep -v "${grep_excludes}")
+
 action='pwd'
 inparallel=false
 quiet=false
+dry_run=false
 
 USAGE="$(basename $0) <options> \n
 \n
@@ -18,21 +22,25 @@ USAGE="$(basename $0) <options> \n
 \t\t            [-a|--action] <the action>\t\t			The action to perform.  Default: \"${action}\" \n
 \t\t            [-p|--parallel] <parallel executions>\t	Execute action in parallel instead of sequentially.  Default: \"${inparallel}\" \n
 \t\t            [-q|--quiet] <quiet output>\t\t	    	Output mininal information.  Default: \"${quiet}\" \n
+\t\t            [-n|--dryrun]\t	Do a dry run (do not execute). \n
 "
 
-args=`getopt -o "hf:a:pq" -l "help,folders,action,parallel,quiet" -- "$@"`
+args=`getopt -o "hf:a:pqn" -l "help,folders,action,parallel,quiet,dryrun" -- "$@"`
 eval set -- "$args"
 while true; do
   case "$1" in
-                -h | --help)		echo -e ${USAGE}; exit;;
-                -f | --folders)		shift; folders="$1"; shift;;
-                -a | --action)		shift; action="$1"; shift;;
-                -p | --parallel)	inparallel=true; shift;;
-                -q | --quiet)		quiet=true; shift;;
-                --)					shift; break;;
-                *)					echo "Internal error!"; exit 1;;
+        -h | --help)		echo -e ${USAGE}; exit;;
+        -f | --folders)		shift; folders="$1"; shift;;
+        -a | --action)		shift; action="$1"; shift;;
+        -p | --parallel)	inparallel=true; shift;;
+        -q | --quiet)		quiet=true; shift;;
+        -n | --dryrun)		dry_run=true; shift;;
+        --)					shift; break;;
+        *)					echo "Internal error!"; exit 1;;
   esac
 done
+
+#folders=$(echo ${folders} | tr '\n' ' ')
 
 if [[ ${quiet} != true ]]; then
 	if [[ ${inparallel} == true ]]; then
@@ -42,17 +50,19 @@ if [[ ${quiet} != true ]]; then
 	fi
 fi
 
+[[ ${dry_run} == true ]] && exit
+
 exit_code=0
 
 if [[ -f "foreach_order.txt" ]]; then
 	if [[ ${inparallel} == true ]]; then
-		lsp -a "$(cat foreach_order.txt)" "cd {}; ${action}"; exit_code=$?
+		lsp -f "$(cat foreach_order.txt)" "cd {}; ${action}"; exit_code=$?
 	else
 		cat foreach_order.txt | while read x; do echo "${RUN_FOLDER}/$x"; cd "${RUN_FOLDER}/$x"; ${action}; exit_code=$((${exit_code} + $?)); done
 	fi
 else
 	if [[ ${inparallel} == true ]]; then
-		lsp -a "${folders}" "cd {}; ${action}"; exit_code=$?
+		lsp -f "${folders}" "cd {}; ${action}"; exit_code=$?
 	else
 		echo ${folders} | while read x; do echo "${RUN_FOLDER}/$x"; cd "${RUN_FOLDER}/$x"; ${action}; exit_code=$((${exit_code} + $?)); done
 	fi
