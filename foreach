@@ -17,12 +17,12 @@ USAGE="$(basename $0) <options> \n
 \n
 \t      Options \n
 \n
-\t\t            [-h|--help]\t\t\t\t						This message gets printed only. \n
-\t\t            [-f|--folders] <the folders>\t\t		Each folder to perform the specified action in.  Default: \"${folders}\" \n
-\t\t            [-a|--action] <the action>\t\t			The action to perform.  Default: \"${action}\" \n
-\t\t            [-p|--parallel] <parallel executions>\t	Execute action in parallel instead of sequentially.  Default: \"${inparallel}\" \n
-\t\t            [-q|--quiet] <quiet output>\t\t	    	Output mininal information.  Default: \"${quiet}\" \n
-\t\t            [-n|--dryrun]\t	Do a dry run (do not execute). \n
+\t\t            -h|--help\t\t\t\t						This message gets printed only. \n
+\t\t            -f|--folders <the folders>\t\t			Each folder to perform the specified action in.  Default: \"${folders}\" \n
+\t\t            -a|--action <the action>\t\t			The action to perform.  Default: \"${action}\" \n
+\t\t            -p|--parallel <parallel executions>\t	Execute action in parallel instead of sequentially.  Default: \"${inparallel}\" \n
+\t\t            -q|--quiet <quiet output>\t\t	    	Output mininal information.  Default: \"${quiet}\" \n
+\t\t            -n|--dryrun\t\t\t\t						Do a dry run (do not execute). \n
 "
 
 args=`getopt -o "hf:a:pqn" -l "help,folders,action,parallel,quiet,dryrun" -- "$@"`
@@ -35,8 +35,8 @@ while true; do
         -p | --parallel)	inparallel=true; shift;;
         -q | --quiet)		quiet=true; shift;;
         -n | --dryrun)		dry_run=true; shift;;
-        --)					shift; break;;
-        *)					echo "Internal error!"; exit 1;;
+        --)			shift; break;;
+        *)			echo "Internal error!"; exit 1;;
   esac
 done
 
