@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-/opt/dev/datastax/dev_center/instances/1.5.0/DevCenter.app/Contents/MacOS/DevCenter
+/opt/dev/datastax/dev_center/instances/6.0.2/DevCenter.app/Contents/MacOS/DevCenter
 
