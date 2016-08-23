@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-killall -HUP mDNSResponder
+dscacheutil -flushcache
+killall -9 mDNSResponder
 
