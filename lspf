@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-grep_excludes=$(cat "${HOME}/stuff/grep_excludes_v.txt")
+grep_excludes_file="${HOME}/stuff/grep_excludes_v.txt"
 
 be_quiet=false
 dry_run=false
@@ -32,7 +32,7 @@ cmd="lsp"
 [[ ${be_quiet} == true ]] && cmd="${cmd} -q"
 
 if [[ -f "${grep_excludes_file}" ]]; then
-	cmd="${cmd} \"find $@\" | grep -v \"${grep_excludes}\""
+	cmd="${cmd} \"find $@\" | grep -vf \"${grep_excludes_file}\""
 else
 	cmd="${cmd} \"find $@\""
 fi
