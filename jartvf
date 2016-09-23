@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-jar -tf $*
+jar -tf $* | parallel "echo $*:{}"
 
