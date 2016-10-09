@@ -14,7 +14,7 @@ USAGE="$(basename $0) <options> \n
 \t\t		[-t|--target] <the target>\t	The target folder to output the backup file into.  Default: \"${TARGET_DEFAULT}\" \n
 "
 
-args=`getopt -o "hf:m:t:" -l "help,folder,message" -- "$@"`
+args=`getopt -o "hf:m:t:" -l "help,folder,message,target" -- "$@"`
 eval set -- "$args"
 while true; do
   case "$1" in
