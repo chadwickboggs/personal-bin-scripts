@@ -46,3 +46,5 @@ set today (echo -n $today | sed 's/ //')
 
 ls *.$yesterday.log | parallel "touch (echo -n {} | sed s/$yesterday/$today/); rm -v {}"
 
+echo Touched: (ls *.$today.log)
+
