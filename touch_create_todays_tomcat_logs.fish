@@ -16,10 +16,11 @@ set USAGE "touch_create_tomcat_logs.fish <options>
 \t\t		[-i|--include]\t\t	Included the \"localhost_access_log.<from date>.txt\" file also.
 "
 
-set args (getopt -o "hf:t:i" -l "help,from,to,include" -- "$argv")
+set args (getopt -o "hf:t:i" -l "help,from,to,include" -- $argv)
 set args (fish -c "for el in $args; echo \$el; end")
 set i 1
-while true
+
+while math "$i <= (count $args)"
   switch "$args[$i]"
 		case "-h"
 			echo -e $USAGE; exit
