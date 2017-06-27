@@ -51,9 +51,10 @@ set today (echo -n $today | sed 's/ //')
 
 ls *.$yesterday.log | parallel "touch (echo -n {} | sed s/$yesterday/$today/); rm -v {}"
 
-if test $include_localhost_access_log -eq 1
+if test "$include_localhost_access_log -eq 1"
 	rm -f localhost_access_log.$yesterday.txt
+	touch localhost_access_log.$today.txt
 end
 
-echo Touched: (ls *.$today.log)
+echo Touched: (ls *.$today.*)
 
