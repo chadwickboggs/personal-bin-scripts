@@ -29,6 +29,8 @@ elif [ "lrz" == "${the_extension}" ]; then
 	lrzip -d "${the_filename}"
 elif [ "gz" == "${the_extension}" ]; then
 	gunzip "${the_filename}"
+elif [ "bz2" == "${the_extension}" ]; then
+	bunzip2 "${the_filename}"
 elif [ "xz" == "${the_extension}" ]; then
 	xz -d "${the_filename}"
 elif [ "lzma" == "${the_extension}" ]; then
