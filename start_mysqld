@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
 
-sudo -u _mysql /opt/local/lib/mysql57/bin/mysqld --datadir='/opt/local/var/db/mysql57' --explicit_defaults_for_timestamp $@
+MYSQL_HOME_DEFAULT="/opt/local/lib/mysql57"
+MYSQLD_DEFAULT="${MYSQL_HOME_DEFAULT}/bin/mysqld"
+
+mysqld="${MYSQLD_DEFAULT}"
+
+if [[ -x $(which mysqld) ]]; then
+	mysqld=$(which mysqld)
+fi
+
+echo sudo -u _mysql ${mysqld} --datadir='/opt/local/var/db/mysql57' --explicit_defaults_for_timestamp $@
 
