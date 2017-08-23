@@ -9,5 +9,5 @@ if [[ -x $(which mysqld) ]]; then
 	mysqld=$(which mysqld)
 fi
 
-echo sudo -u _mysql ${mysqld} --datadir='/opt/local/var/db/mysql57' --explicit_defaults_for_timestamp $@
+sudo -u _mysql ${mysqld} --datadir='/opt/local/var/db/mysql57' --explicit_defaults_for_timestamp $@
 
