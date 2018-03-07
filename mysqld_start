@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysqld
+

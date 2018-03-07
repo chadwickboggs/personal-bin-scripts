@@ -40,11 +40,11 @@ elif [ "rz" == "${the_extension}" ]; then
 elif [ "zip" == "${the_extension}" ]; then
 	unzip -q "${the_filename}"
 
-elif [[ "tgz" == "${the_extension}" || "tar" == "${the_extension}" ]]; then
+elif [[ "tar" == "${the_extension}" ]]; then
 	tar xf "${the_filename}"
 elif [[ "tgz" == "${the_extension}" || "tar.gz" == "${the_extension}" ]]; then
 	tar xzf "${the_filename}"
-elif [[ "bz2" == "${the_extension}" || "tbz" == "${the_extension}" || "tar.bz2" == "${the_extension}" ]]; then
+elif [[ "tbz2" == "${the_extension}" || "tbz" == "${the_extension}" || "tar.bz2" == "${the_extension}" ]]; then
 	tar xjf "${the_filename}"
 elif [[ "tlz" == "${the_extension}" || "tar.lz" == "${the_extension}" ]]; then
 	tar --use-compress-program=plzip -xf "${the_filename}"
@@ -55,8 +55,9 @@ elif [[ "tlzo" == "${the_extension}" || "tar.lzo" == "${the_extension}" || "tar.
 elif [[ "tlrz" == "${the_extension}" || "tar.lrz" == "${the_extension}" ]]; then
 	lrzuntar "${the_filename}"
 elif [[ "tbr" == "${the_extension}" || "tar.br" == "${the_extension}" ]]; then
-	brotli="/opt/workspace/third_party/brotli/python/bro.py"
-	tar --use-compress-program=$brotli -xf "${the_filename}"
+#	brotli="/opt/workspace/third_party/brotli/python/bro.py"
+#	tar --use-compress-program=$brotli -xf "${the_filename}"
+	tar --use-compress-program=brotli -xf "${the_filename}"
 
 else
 	echo "File extension not recognized: \"${the_extension}\"."
