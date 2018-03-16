@@ -8,7 +8,7 @@ USAGE="$(basename $0) <options> \n
 \n
 \t	Options \n
 \n
-\t\t		[-h|--help]\t\t\t\t			This message gets printed only. \n
+\t\t		[-h|--help]\t\t\t				This message gets printed only. \n
 \t\t		[-m|--message] <the message>\t	The message to encode into the filename.  Default: \"\" \n
 \t\t		[-f|--folder] <the folder>\t	The file or folder to backup.  Default: \".\" \n
 \t\t		[-t|--target] <the target>\t	The target folder to output the backup file into.  Default: \"${TARGET_DEFAULT}\" \n
