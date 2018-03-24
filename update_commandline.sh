@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-sudo nice port selfupdate
-sudo nice port upgrade outdated
-#sudo nice port upgrade installed
+port selfupdate
+port upgrade outdated
+#port upgrade installed
 
-#sudo nice fink -qy selfupdate
-#sudo nice fink -qy selfupdate-rsync
-#sudo nice fink -qy update-all
-#sudo nice fink -qy index -f
+#fink -qy selfupdate
+#fink -qy selfupdate-rsync
+#fink -qy update-all
+#fink -qy index -f
 
-sudo nice npm upgrade
-sudo nice gem update
+npm upgrade
+gem update
 
 exit $?
