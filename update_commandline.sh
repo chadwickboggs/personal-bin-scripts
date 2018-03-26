@@ -9,7 +9,7 @@ port upgrade outdated
 #fink -qy update-all
 #fink -qy index -f
 
-#gem update
-#npm upgrade
+gem update
+npm upgrade
 
 exit $?
