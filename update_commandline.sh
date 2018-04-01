@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-echo "Executing \"port selfupdate\""
+echo "Executing: \"port selfupdate\""
 port selfupdate
 echo
 
-echo "Executing \"port upgrade outdated\""
+echo "Executing: \"port upgrade outdated\""
 port upgrade outdated
 echo
 
@@ -15,11 +15,11 @@ echo
 #fink -qy update-all
 #fink -qy index -f
 
-echo "Executing \"gem update\""
+echo "Executing: \"gem update\""
 gem update
 echo
 
-echo "Executing \"npm upgrade\""
+echo "Executing: \"npm upgrade\""
 npm upgrade
 echo
 
