@@ -2,11 +2,10 @@
 
 echo "Executing: \"port selfupdate\""
 port selfupdate
-echo
 
+echo
 echo "Executing: \"port upgrade outdated\""
 port upgrade outdated
-echo
 
 #port upgrade installed
 
@@ -15,12 +14,12 @@ echo
 #fink -qy update-all
 #fink -qy index -f
 
+echo
 echo "Executing: \"gem update\""
 gem update
-echo
 
+echo
 echo "Executing: \"npm upgrade\""
 npm upgrade
-echo
 
 exit $?
