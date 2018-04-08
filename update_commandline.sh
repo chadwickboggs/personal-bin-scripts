@@ -2,10 +2,12 @@
 
 echo "Executing: \"port selfupdate\""
 port selfupdate
+rtn_code=$?
 
 echo
 echo "Executing: \"port upgrade outdated\""
 port upgrade outdated
+rtn_code=$((${rtn_code} + $?))
 
 #port upgrade installed
 
@@ -17,9 +19,12 @@ port upgrade outdated
 echo
 echo "Executing: \"gem update\""
 gem update
+rtn_code=$((${rtn_code} + $?))
 
 echo
 echo "Executing: \"npm upgrade\""
 npm upgrade
+rtn_code=$((${rtn_code} + $?))
 
-exit $?
+exit ${rtn_code}
+
