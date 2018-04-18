@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+USAGE="$(basename $0) [options] <file one> <file two> \n
+\n
+\t	Compare the md5sum's between two files. \n
+\n
+\t	Options \n
+\n
+\t\t		[-h|--help]\t	This message gets printed only. \n
+"
+
+args=`getopt -o "h" -l "help" -- "$@"`
+eval set -- "$args"
+while true; do
+  case "$1" in
+		-h | --help) 	echo -e ${USAGE}; exit;;
+		--) shift; break;;
+		*) echo "Internal error!"; exit 1;;
+  esac
+done
+
+md5sum $1 | awk "{ print \$1 \"  \" \"$2\"}" | md5sum -c
+
+exit $?
+
