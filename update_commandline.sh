@@ -6,7 +6,7 @@ rtn_code=$?
 
 echo
 echo "Executing: \"port upgrade outdated\""
-port -RN upgrade outdated
+port -RNp upgrade outdated
 rtn_code=$((${rtn_code} + $?))
 
 #fink -qy selfupdate
