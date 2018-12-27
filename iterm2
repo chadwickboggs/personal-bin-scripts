@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-/Applications/iTerm2-3_1_beta_9.app/Contents/MacOS/iTerm2
+/Applications/iTerm.app/Contents/MacOS/iTerm2
 
+exit $?

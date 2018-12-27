@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-start_number=1
+start_number=0
 line_count=1
 
 USAGE="$(basename $0) <options> \n
@@ -27,4 +27,3 @@ while true; do
 done
 
 head -n $((${line_count} + ${start_number})) | tail -n ${line_count}
-
