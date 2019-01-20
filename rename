@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# A smarter command doing similar to this one may be the "mmv" command.
+#
+
 if [[ $# != 2 ]]; then
 	echo 'Two arguments expected'
 	exit 1
