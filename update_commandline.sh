@@ -6,7 +6,7 @@ rtn_code=$?
 
 echo
 echo "Executing: \"port upgrade outdated\""
-port -RNp upgrade outdated
+port -RNpu upgrade outdated
 rtn_code=$((${rtn_code} + $?))
 
 #fink -qy selfupdate
@@ -14,15 +14,19 @@ rtn_code=$((${rtn_code} + $?))
 #fink -qy update-all
 #fink -qy index -f
 
-echo
-echo "Executing: \"gem update\""
-gem update
-rtn_code=$((${rtn_code} + $?))
+#echo
+#echo "Executing: \"gem update\""
+#gem update
+#rtn_code=$((${rtn_code} + $?))
+
+#echo
+#echo "Executing: \"npm upgrade\""
+#npm upgrade
+#rtn_code=$((${rtn_code} + $?))
 
 echo
-echo "Executing: \"npm upgrade\""
-npm upgrade
-rtn_code=$((${rtn_code} + $?))
+echo "Executing: \"fish_update_completions\""
+fish_update_completions
 
 exit ${rtn_code}
 
