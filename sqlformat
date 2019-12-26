@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+sqlformat-3.7 $@
+
+exit $?
+
