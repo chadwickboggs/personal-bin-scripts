@@ -24,9 +24,9 @@ rtn_code=$((${rtn_code} + $?))
 #npm upgrade
 #rtn_code=$((${rtn_code} + $?))
 
-echo
-echo "Executing: \"fish_update_completions\""
-fish_update_completions
+#echo
+#echo "Executing: \"fish_update_completions\""
+#fish_update_completions
 
 exit ${rtn_code}
 
