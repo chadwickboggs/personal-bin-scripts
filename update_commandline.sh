@@ -36,9 +36,9 @@ echo "Done updating Homebrew."
 #echo "Done updating NPM."
 
 #echo
-echo "Updating Fish Shell Completions..."
-fish_update_completions
-echo "Done updating Fish Shell Completins."
+#echo "Updating Fish Shell Completions..."
+#fish_update_completions
+#echo "Done updating Fish Shell Completins."
 
 exit ${rtn_code}
 
