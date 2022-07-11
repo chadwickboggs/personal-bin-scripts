@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 echo "Selfupdating MacPorts..."
-sudo port selfupdate
+/usr/bin/sudo port selfupdate
 rtn_code=$?
 echo "Done selfupdating MacPorts."
 
 echo
 echo "Updating MacPorts..."
-sudo port -RNpu upgrade outdated
+/usr/bin/sudo port -RNpu upgrade outdated
 rtn_code=$((${rtn_code} + $?))
 echo "Done updating MacPorts."
 
