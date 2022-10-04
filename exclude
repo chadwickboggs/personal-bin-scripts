@@ -9,7 +9,7 @@ for x in $*; do
 done
 
 if [[ -n "$expr" ]]; then
-	egrep -v "$expr"
+	grep -E -v "$expr"
 fi
 
 exit $?

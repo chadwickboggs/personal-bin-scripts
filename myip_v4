@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 #ifconfig|grep 'inet '|head -n 2|tail -n 1|cut -d ' ' -f 2
-ifconfig | grep 'inet6* ' | awk '{ print $2 }' | egrep '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+'
+ifconfig | grep 'inet6* ' | awk '{ print $3 }' | grep -E '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+'
 
 exit $?
